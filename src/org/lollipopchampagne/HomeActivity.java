@@ -12,7 +12,7 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        int wesh = 0;
+        int test = 0;
     }
 
 
