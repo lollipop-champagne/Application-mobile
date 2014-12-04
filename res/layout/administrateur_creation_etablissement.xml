@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="#FF5E3A"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/admin_crea_eta_titre"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:layout_centerInParent="true"
+            android:textColor="#FFFFFF"
+            android:gravity="center_horizontal"
+            android:text="@string/administrateur_creation_eta_titre_texte" />
+        
+        <TextView
+            android:id="@+id/admin_crea_eta_btn_save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="30dp"
+            android:clickable="true"
+            android:onClick="creerEtablissement"
+            android:text="@string/bout_ok_txt"
+            android:textColor="@drawable/button_color_selector" 
+            android:textSize="18sp" />
+        
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/et_crea_eta_nom"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/hint_nom"
+        android:layout_gravity="center"
+        android:singleLine="true"
+        android:layout_marginTop="30dp"
+        android:inputType="text" />
+
+    <EditText
+        android:id="@+id/et_crea_eta_ville"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/admin_crea_eta_hint_ville"
+        android:layout_gravity="center"
+        android:singleLine="true"
+        android:layout_marginTop="20dp"
+        android:inputType="text" />
+    
+</LinearLayout>
