@@ -5,22 +5,39 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="10"
+        android:minSdkVersion="13"
         android:targetSdkVersion="15" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ic_launcher"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:theme="@android:style/Theme.NoTitleBar" >
+        android:theme="@android:style/Theme.Holo.Light.NoActionBar.Fullscreen"
+        android:screenOrientation="portrait" >
         <activity
-            android:name="org.lollipopchampagne.ConnexionA"
+            android:name="org.lollipopchampagne.HomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="org.lollipopchampagne.CreationActivity"
+            android:label="Création" >
+        </activity>
+        <activity
+            android:name="org.lollipopchampagne.AccueilActivity"
+            android:label="@string/title_activity_accueil" >
+        </activity>
+        <activity
+            android:name="org.lollipopchampagne.ConnexionA"
+            android:label="@string/title_activity_accueil" >
         </activity>
     </application>
 

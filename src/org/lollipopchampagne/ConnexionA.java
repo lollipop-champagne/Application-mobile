@@ -6,6 +6,7 @@ import java.util.*;
 import org.apache.http.*;
 import org.apache.http.client.*;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
@@ -18,6 +19,7 @@ import android.app.*;
 import android.content.*;
 import android.content.res.Configuration;
 import android.os.*;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import android.os.Bundle;
@@ -48,7 +50,7 @@ private Activity activity;
 	 * @param view La vue lors du click sur le bouton.
 	 */
 	public void inscription(View view) {
-		//startActivity(new Intent(ConnexionA.this, InscriptionA.class));			
+		startActivity(new Intent(ConnexionA.this, CreationActivity.class));			
 	}
 	
 	/**
@@ -65,7 +67,7 @@ private Activity activity;
 			a.setPseudo(PSEUDO.getText().toString());
 			a.setPassword(SecurityUtils.sha256(PASSWORD.getText().toString()));
 			
-			String URL = Constantes.URL_SERVER + "admin/login";
+			String URL = Constantes.URL_SERVER + "centre/login";
 
 			ProgressDialog progress = new ProgressDialog(activity);
 			progress.setMessage("Chargement...");
@@ -121,24 +123,28 @@ private Activity activity;
 
 		protected Void doInBackground(Void... arg0) {
 		    HttpClient httpclient = new DefaultHttpClient();
-		    HttpPost httppost = new HttpPost(pathUrl);
+		    pathUrl = pathUrl + "?username" + a.getPseudo() + "&password" + a.getPassword();
+		    HttpGet httpget = new HttpGet(pathUrl);
 
 		    try {
-		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
-		        nameValuePairs.add(new BasicNameValuePair("username", a.getPseudo()));
-				nameValuePairs.add(new BasicNameValuePair("password", a.getPassword()));
-		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+//		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+//		        nameValuePairs.add(new BasicNameValuePair("username", a.getPseudo()));
+//				nameValuePairs.add(new BasicNameValuePair("password", a.getPassword()));
+//		        httpget.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
-		        HttpResponse response = httpclient.execute(httppost);
+		        HttpResponse response = httpclient.execute(httpget);
+		        Log.e("CreationActivity", "Code: " + response.getStatusLine().getStatusCode() );
+		        Log.e("CreationActivity", "URL: " + pathUrl );
+
 		        
 		        if (response.getStatusLine().getStatusCode() == 200) {
 		        	String responseBody = EntityUtils.toString(response.getEntity());
 		        	
-		        	FileUtils.writeFile(responseBody, "/sdcard/cacheJMD/token.jmd");
-		        	FileUtils.writeFile(a.getPseudo(), "/sdcard/cacheJMD/pseudo.jmd");
+		        	FileUtils.writeFile("0", "/sdcard/cacheHumaStock/connecte.txt");
 		    		
 		        	finish();
-					//startActivity(intent);
+		        	Intent intent = new Intent(ConnexionA.this, AccueilActivity.class);
+					startActivity(intent);
 		        } else if (response.getStatusLine().getStatusCode() == 401) {
 		        	toast.setText("Mauvais identifiants. Veuillez réessayer.");	
 					toast.show();
